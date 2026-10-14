@@ -1,7 +1,7 @@
 import express from 'express'
 import { Router } from 'express'
 import {body} from "express-validator";
-import { registerUser,loginUser,userProfile } from '../controller/userController.js';
+import { registerUser,loginUser,userProfile, logoutUser } from '../controller/userController.js';
 import { authUser } from '../middleware/AuthMiddleware.js';
 
 const router = Router();
@@ -21,5 +21,7 @@ router.get("/login", [
 ], loginUser)
 
 router.get("/profile",authUser,userProfile)
+
+router.get("/logout",authUser,logoutUser)
 
 export default router ;
