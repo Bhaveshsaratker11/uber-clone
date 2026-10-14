@@ -1,6 +1,7 @@
 import { validationResult } from "express-validator";
 import userModel from "../model/userModel.js";
 import { createUser } from "../services/userService.js";
+import { authUser } from "../middleware/AuthMiddleware.js";
 
 //  register controller logic
 
@@ -64,6 +65,8 @@ export const loginUser = async (req, res, next) => {
 
         const token = user.generateAuthToken();
 
+        res.cookie('token',token);
+
         return res.status(200).json({ token, user })
 
     } catch (error) {
@@ -71,3 +74,15 @@ export const loginUser = async (req, res, next) => {
     }
 }
 
+
+// profile controller 
+
+export const userProfile = async (req, res, next)=>{
+    return res.status(200).json(req.user);
+}
+
+// logout constroller 
+
+export const logoutUser = async(req, res, next)=>{
+    
+}
